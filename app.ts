@@ -20,14 +20,14 @@ class App {
     private async database() {
         try {
             mongoose.set("strictQuery", true)
-            await mongoose.connect('mongodb://0.0.0.0:27017/esoft5s-books')
+            await mongoose.connect('mongodb://0.0.0.0:27017/usuario')
             console.log('Connect database success')
         } catch (error) {
             console.error('Cannot connect to database, error:', error)
         }
     }
 
-    private routes(): void {
+    public routes(): void {
         this.express.use(routes)
     }
 }

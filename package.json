@@ -8,9 +8,15 @@
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "description": "",
+  "description": "https://dontpad.com/esoft5s-b-bussola",
   "dependencies": {
-    "express": "^4.19.1",
-    "mongoose": "^8.2.2"
+    "express": "^4.19.2",
+    "mongoose": "^8.2.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
   }
 }
