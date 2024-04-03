@@ -1,6 +1,7 @@
 import { Router } from "express";
 import usuarioController from "./src/usuario/controllers/usuario.controller";
 import tarefaController from "./src/tarefa/controllers/tarefa.controller";
+import categoriaControllers from "./src/categoria/controllers/categoria.controllers";
 
 const routes = Router()
 
@@ -17,6 +18,11 @@ routes.get('/tarefa/:id', tarefaController.findById)
 routes.put('/tarefa/:id', tarefaController.update)
 routes.delete('/tarefa/:id', tarefaController.delete)
 //CATEGORIA
+routes.post('/categoria', categoriaControllers.create)
+routes.get('/categoria', categoriaControllers.findAll)
+routes.get('/categoria/:id', categoriaControllers.findById)
+routes.put('/categoria/:id', categoriaControllers.update)
+routes.delete('/categoria/:id', categoriaControllers.delete)
 
 export{
     routes

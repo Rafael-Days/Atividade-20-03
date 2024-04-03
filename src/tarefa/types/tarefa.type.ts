@@ -1,3 +1,4 @@
+import { CategoriaType } from "../../categoria/types/categoria.type";
 import { UsuarioType } from "../../usuario/types/usuario.type";
 
 export enum StatusEnum {
@@ -12,7 +13,7 @@ export interface TarefaType {
     dataCriacao: String,
     dataConclusao: String,
     tipo: String,
-    categoria: String, //POR ENQUANTO***
+    categoria: CategoriaType, //POR ENQUANTO***
     status: StatusEnum,
     usuario: { type: UsuarioType, require: true}
 }
