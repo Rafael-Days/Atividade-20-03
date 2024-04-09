@@ -1,11 +1,6 @@
 import { CategoriaType } from "../../categoria/types/categoria.type";
 import { UsuarioType } from "../../usuario/types/usuario.type";
-
-export enum StatusEnum {
-    PENDENTE = 'pendente',
-    EM_ANDAMENTO = 'em andamento',
-    CONCLUIDA = 'concluída'
-}
+import StatusEnum from "../enum/tarefa.enum";
 
 export interface TarefaType {
 

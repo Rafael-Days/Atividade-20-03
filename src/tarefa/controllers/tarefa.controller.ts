@@ -52,6 +52,50 @@ class TarefaController{
         res.status(200)
         return res.json(deletedTarefa)
     }
+
+    async findConcluidas(req:Request, res: Response){
+        try{
+            const findTarefasConcluidas = await tarefaService.findConcluidas()
+            res.status(200)
+            return res.json(findTarefasConcluidas)
+        } catch (error) {
+            console.error('Erro ao procurar tarefas concluidas', error)
+            return res.status(500).json({message: 'Erro ao procurar tarefas concluidas'})
+        }
+    }
+
+    async findPendentes(req:Request, res: Response){
+        try{
+            const findTarefasPendentes = await tarefaService.findPendentes()
+            res.status(200)
+            return res.json(findTarefasPendentes)
+        } catch (error) {
+            console.error('Erro ao procurar tarefas pendentes', error)
+            return res.status(500).json({message: 'Erro ao procurar tarefas pendentes'})
+        }
+    }
+
+    async findTarefasCategoria(req:Request, res: Response){
+        try{
+            const findTarefasC = await tarefaService.findTarefasPorCategoria(req.params.idCategoria)
+            res.status(200)
+            return res.json(findTarefasC)
+        } catch (error) {
+            console.error('Erro ao procurar a categoria da tarefa', error)
+            return res.status(500).json({message: 'Erro ao procurar a categoria da tarefa'})
+        }
+    }
+
+    async findTarefasUsuario(req:Request, res: Response){
+        try{
+            const findTarefasU = await tarefaService.findTotalTarefasUsuario(req.params.idUsuario)
+            res.status(200)
+            return res.json(findTarefasU)
+        } catch (error) {
+            console.error('Erro ao procurar as tarefas do usuario', error)
+            return res.status(500).json({message: 'Erro ao procurar as tarefas do usuario'})
+        }
+    }
 }
 
 export default new TarefaController()

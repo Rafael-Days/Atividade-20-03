@@ -17,8 +17,14 @@ routes.get('/tarefa', tarefaController.findAll)
 routes.get('/tarefa/:id', tarefaController.findById)//Rota para obter detalhes de uma tarefa específica
 routes.put('/tarefa/:id', tarefaController.update)//Rota para atualizar uma tarefa existente
 routes.delete('/tarefa/:id', tarefaController.delete)//Rota para excluir uma tarefa.
+
+routes.get('tarefa/concluidas', tarefaController.findConcluidas)//Procura tarefas concluidas
+routes.get('tarefa/pedentes', tarefaController.findPendentes)//Procura tarefas pendentes
+routes.get('tarefa/categoria/:idCategoria', tarefaController.findTarefasCategoria)//Procura categoria das tarefas
+routes.get('tarefa/usuario/:idUsuario', tarefaController.findTarefasUsuario)//Procura as tarefas do usuario**Incompleto
 //const filtroCategoria = categoria.TarefaType.filter((tarefa) => tarefa.length == Categoria);
 //const filtroStatus = status.TarefaType.filter((tarefa) => tarefa.length == CONCLUIDA);
+
 //CATEGORIA
 routes.post('/categoria', categoriaControllers.create)//Rota para criação de uma nova categoria.
 routes.get('/categoria', categoriaControllers.findAll)
