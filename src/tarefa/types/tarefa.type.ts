@@ -5,8 +5,10 @@ import StatusEnum from "../enum/tarefa.enum";
 export interface TarefaType {
 
     idTarefa: String,
-    dataCriacao: String,
-    dataConclusao: String,
+    titulo: String,
+    descricao: String,
+    dataCriacao: Date,
+    dataConclusao: Date,
     tipo: String,
     categoria: CategoriaType, //POR ENQUANTO***
     status: StatusEnum,

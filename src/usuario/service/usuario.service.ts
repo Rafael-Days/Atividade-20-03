@@ -20,7 +20,7 @@ class UsuarioService {
 
     async update(id: string, usuario: UsuarioType) {
         const updateUsuario = await UsuarioModel.findByIdAndUpdate(id, {
-            id: usuario.id,
+            id: usuario.idUsuario,
             username: usuario.username,
             peso: usuario.peso,
             email: usuario.email,

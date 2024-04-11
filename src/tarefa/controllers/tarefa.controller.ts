@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import tarefaService from "../service/tarefa.service";
+import { json } from "stream/consumers";
 
 
 class TarefaController{
@@ -94,6 +95,73 @@ class TarefaController{
         } catch (error) {
             console.error('Erro ao procurar as tarefas do usuario', error)
             return res.status(500).json({message: 'Erro ao procurar as tarefas do usuario'})
+        }
+    }
+
+    async findTarefasVencidas(req: Request, res: Response){
+        try{
+            const inicio = new Date(req.params.inicio);
+            const fim = new Date(req.params.fim);
+            const tarefas = await tarefaService.findPeriodo(inicio, fim)
+            res.status(200).json(tarefas)
+        } catch (error){
+            console.error('Erro ao procurar tarefas vencidas', error)
+            return res.status(500).json({message: 'Erro ao procurar tarefas vencidas'})
+        }
+    }
+
+    async findTarefaRecente(req: Request, res: Response){
+        try{
+            const findTarefa = await tarefaService.tarefaRecente(req.params.idUsuario)
+            res.status(200)
+            return res.json(findTarefa)
+        }catch (error){
+            console.error('Erro ao procurar tarefa mais recente', error)
+            return res.status(500).json({message: 'Erro ao procurar tarefa mais recente'})
+        }
+    }
+
+    async findDescricaoLonga(req: Request, res: Response){
+        try{
+            const findTarefa = await tarefaService.descricaoMaisLonga()
+            res.status(200)
+            return res.json(findTarefa)
+        } catch(error){
+            console.error('Erro ao procurar a descrição mais longa da tarefa', error)
+            return res.status(500).json({message: 'Erro ao procurar a descrção mais longa da tarefa'})
+        }
+    }
+
+    async calcMediaConclusao(req: Request, res: Response){
+        try{
+            const calcMedia = await tarefaService.calcularMedia()
+            res.status(200)
+            return res.json(calcMedia)
+        } catch(error){
+            console.error('Erro ao calcular a média das conclusões', error)
+            return res.status(500).json({message: 'Erro ao calcular a média das conclusões'})
+        }
+    }
+
+    async findTarefaMaisAntiga(req: Request, res: Response){
+        try{
+            const tarefaAntiga = await tarefaService.tarefaMaisAntiga(req.params.idUsuario)
+            res.status(200)
+            return res.json(tarefaAntiga)
+        }catch(error){
+            console.error('Erro ao procuarar a tarefa mais antiga', error)
+            return res.status(500).json({message: 'Erro ao procurar a tarefa mais antiga'})
+        }
+    }
+
+    async findAgruparTarefaPorCategoria(req: Request, res: Response){
+        try{
+            const tarefaAgrupada = await tarefaService.agruparTarefasPorCategoria()
+            res.status(200)
+            return res.json(tarefaAgrupada)
+        }catch(error){
+            console.error('Erro ao agrupar as tarefas por categoria', error)
+            return res.status(500).json({message: 'Erro ao agrupar as tarefas por categoria'})
         }
     }
 }

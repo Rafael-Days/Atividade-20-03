@@ -1,6 +1,6 @@
 export interface UsuarioType {
     
-    id: String,
+    idUsuario: String,
     username: String,
     peso: Number,
     email: String,

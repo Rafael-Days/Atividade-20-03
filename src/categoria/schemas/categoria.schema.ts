@@ -1,12 +1,16 @@
 import { Schema, model } from "mongoose";
-import categoriaSchema from "../../categoria/schemas/categoria.schema";
+
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence') (mongoose)
 
 const CategoriaSchema = new Schema({
-    idCategoria: String,
-    nomeCategoria: String,
-    cor: String
+    idCategoria: { type: String, require: true },
+    nomeCategoria: { type: String, require: true },
+    cor: { type: String, require: true}
 }, {
     timestamps: true
 })
+
+CategoriaSchema.plugin(AutoIncrement(mongoose), { inc_field: 'idCategoria' })
 
 export default model("Categoria", CategoriaSchema)

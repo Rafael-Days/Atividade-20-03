@@ -11,6 +11,7 @@ routes.get('/usuario', usuarioController.findAll)
 routes.get('/usuario/:id', usuarioController.findById)
 routes.put('/usuario/:id', usuarioController.update)
 routes.delete('/usuario/:id', usuarioController.delete)
+
 //TAREFA
 routes.post('/tarefa', tarefaController.create)//criação de uma nova tarefa
 routes.get('/tarefa', tarefaController.findAll)
@@ -21,9 +22,14 @@ routes.delete('/tarefa/:id', tarefaController.delete)//Rota para excluir uma tar
 routes.get('tarefa/concluidas', tarefaController.findConcluidas)//Procura tarefas concluidas
 routes.get('tarefa/pedentes', tarefaController.findPendentes)//Procura tarefas pendentes
 routes.get('tarefa/categoria/:idCategoria', tarefaController.findTarefasCategoria)//Procura categoria das tarefas
-routes.get('tarefa/usuario/:idUsuario', tarefaController.findTarefasUsuario)//Procura as tarefas do usuario**Incompleto
-//const filtroCategoria = categoria.TarefaType.filter((tarefa) => tarefa.length == Categoria);
-//const filtroStatus = status.TarefaType.filter((tarefa) => tarefa.length == CONCLUIDA);
+routes.get('tarefa/usuario/:idUsuario', tarefaController.findTarefasUsuario)//Procura o total de tarefas do usuario
+routes.get('tarefa/periodo/:inicio/:fim', tarefaController.findTarefasVencidas)//Passa a data de inicio e fim, recebe as que vão vencer
+routes.get('terafa/recente/:idUsuario', tarefaController.findTarefaRecente)//Encontra a tarefa mais recente
+
+routes.get('tarefa/descricao-longa', tarefaController.findDescricaoLonga)//Mostra a descrição mais longa das tarefas
+routes.get('tarefa/media-conclusao', tarefaController.calcMediaConclusao)//Retorna a média das tarefas concluidas
+routes.get('tarefa/mais-antiga/:idUsuario', tarefaController.findTarefaMaisAntiga)//Procura a tarefa mais antiga
+routes.get('tarefa/categoria/agrupar', tarefaController.findAgruparTarefaPorCategoria)//Agrupa tarefas por categorias
 
 //CATEGORIA
 routes.post('/categoria', categoriaControllers.create)//Rota para criação de uma nova categoria.

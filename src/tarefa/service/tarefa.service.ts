@@ -51,8 +51,7 @@ class TarefaService {
         return findPendentes
     }
 
-    async findTarefasPorCategoria(idCategoria: String){
-        //const categoriasID = await CategoriaModel.findById(idCategoria)
+    async findTarefasPorCategoria(idCategoria: string){
         const findTarefasConcluidas = await TarefaModel.find({categoria: idCategoria})
         if (!findTarefasConcluidas) {
             throw new Error('Tarefa não encontrada');
@@ -61,14 +60,49 @@ class TarefaService {
         return findTarefasConcluidas
     }
 
-    async findTotalTarefasUsuario(idUsuario: String){
-        const findTarefasPorUsuario = await TarefaModel.find({usuario: idUsuario})//está apenas retornando as tarefas do usuario, deve mostrar o total.
-        if (!findTarefasPorUsuario) {
+    async findTotalTarefasUsuario(idUsuario: string){
+        const totalTarefas = await TarefaModel.countDocuments({usuario: idUsuario})
+        if (!totalTarefas) {
             throw new Error('Tarefa não encontrada');
         }
 
-        return findTarefasPorUsuario
+        return totalTarefas
     }
+
+    async findPeriodo(inicio: Date, fim: Date){
+        const periodo = await TarefaModel.find({ dataCriacao: { $gte: inicio, $lte: fim } })
+        return periodo
+    }
+
+    async tarefaRecente(idUsuario: string){
+        const tarefa = await TarefaModel.findOne({ usuario: idUsuario }).sort({ dataCriacao: -1 })
+        return tarefa
+    }
+
+    async descricaoMaisLonga(){
+        const descTarefa = await TarefaModel.findOne().sort({ descricao: -1 })
+        return descTarefa
+    }
+
+    async calcularMedia() {
+        const totalTarefas = await TarefaModel.countDocuments()
+        const concluidas = await TarefaModel.countDocuments({ status: 'concluída' })
+        const mediaCalculada = (concluidas / totalTarefas) * 100 
+        return mediaCalculada
+    }
+
+    async tarefaMaisAntiga(idUsuario: string) {
+        const tarefa = await TarefaModel.findOne({ usuario: idUsuario }).sort({ dataCriacao: 1 })
+        return tarefa
+    }
+
+    async agruparTarefasPorCategoria(){
+        const tarefasAgrupadas = await TarefaModel.aggregate([{
+            $group: { _id: "$categoria", count: { $sum: 1 } } }
+        ]);
+        return tarefasAgrupadas
+    }
+
 }
 
 export default new TarefaService()
